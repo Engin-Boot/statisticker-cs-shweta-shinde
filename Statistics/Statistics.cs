@@ -1,12 +1,47 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Statistics
 {
-    public class StatsComputer
+    public class Stats
     {
-        public Stats CalculateStatistics(List<float> numbers) {
-            //Implement statistics here
+        public float average;
+        public float max;
+        public float min;
+        public Stats()
+        {
+            this.average = float.NaN;
+            this.max = float.NaN;
+            this.min = float.NaN;
         }
     }
+    public class StatsComputer
+    {  
+        public Stats CalculateStatistics(List<float> numbers) {
+            
+            //Implement statistics here
+            Stats stats = new Stats();
+            if (numbers.Count!= 0)
+            {
+                if (numbers.Contains(float.NaN))
+                {
+                    //numbers.RemoveAll(float.IsNaN);
+                    List<float> NumberListWithoutNaNValues = numbers;
+                    NumberListWithoutNaNValues.RemoveAll(float.IsNaN);
+                    stats.average = NumberListWithoutNaNValues.Average();
+                    stats.max = NumberListWithoutNaNValues.Max();
+                    stats.min = NumberListWithoutNaNValues.Min();
+
+                }
+                else
+                {
+                    stats.average = numbers.Average();
+                    stats.max = numbers.Max();
+                    stats.min = numbers.Min();
+                }
+            }
+            return stats;
+        }  
+    }  
 }
