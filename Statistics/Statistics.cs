@@ -26,11 +26,20 @@ namespace Statistics
             {
                 if (numbers.Contains(float.NaN))
                 {
-                    numbers.RemoveAll(float.IsNaN);
+                    //numbers.RemoveAll(float.IsNaN);
+                    List<float> NumberListWithoutNaNValues = numbers;
+                    NumberListWithoutNaNValues.RemoveAll(float.IsNaN);
+                    stats.average = NumberListWithoutNaNValues.Average();
+                    stats.max = NumberListWithoutNaNValues.Max();
+                    stats.min = NumberListWithoutNaNValues.Min();
+
                 }
-                stats.average = numbers.Average();
-                stats.max = numbers.Max();
-                stats.min = numbers.Min();       
+                else
+                {
+                    stats.average = numbers.Average();
+                    stats.max = numbers.Max();
+                    stats.min = numbers.Min();
+                }
             }
             return stats;
         }  
